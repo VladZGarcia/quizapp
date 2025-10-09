@@ -1,10 +1,9 @@
-import Quiz from "../components/Quiz";
+import FlashcardInput from "../components/flascard_input";
 
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4">QuizApp</h1>
-      <Quiz />
-    </div>
+    <section>
+      <FlashcardInput />
+    </section>
   );
 }
