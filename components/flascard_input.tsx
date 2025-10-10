@@ -22,12 +22,11 @@ export default function FlashcardInput() {
   return (
     <section>
       <div className="mt-8">
-        <h1 className="text-3xl font-bold mb-4">FlashcardMaker</h1>
+        <h1 className="text-3xl font-bold mb-4">QuizMaker</h1>
       </div>
       <div>
         <p className="mb-4">
-          Welcome to FlashcardMaker! This app helps you create flashcards for
-          studying. Enter a topic and the app will generate flashcards for you.
+          Welcome to QuizMaker! This app helps you create quizzes for studying. Enter a topic and the app will generate quiz questions for you.
         </p>
   <form onSubmit={handleSubmit}>
           <textarea

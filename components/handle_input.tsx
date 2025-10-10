@@ -2,30 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 
-/* export default function HandleInput() {
-  const [response, setResponse] = useState<string | null>(null);
-  const [input, setInput] = useState<string>("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Read input from localStorage
-    const saved = localStorage.getItem('quiz_input') || "";
-    setInput(saved);
-  }, []);
-
-  useEffect(() => {
-    if (!input) return;
-    const prompt = `Create a set of quiz questions in the following JSON format:
-[
-  "use client";
-
-  import React, { useState, useEffect } from "react";
-
-  const { CohereClient } = require("cohere-ai");
-  const cohere = new CohereClient({
-    token: process.env.COHERE_API_KEY,
-  }); */
 
 export default function HandleInput() {
   const [response, setResponse] = useState<string | null>(null);
