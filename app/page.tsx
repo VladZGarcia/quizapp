@@ -1,9 +1,14 @@
-import FlashcardInput from "../components/flascard_input";
+import CTAButton from "../components/cta_button";
 
 export default function Home() {
   return (
     <section>
-      <FlashcardInput />
+      <main>
+        <div className="flex min-h-screen flex-col items-center justify-center p-24">
+          <h1 className="text-4xl font-bold ">EZ Quiz Maker AI</h1>
+          <CTAButton />
+        </div>
+      </main>
     </section>
   );
 }

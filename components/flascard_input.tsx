@@ -21,7 +21,7 @@ export default function FlashcardInput() {
 
   return (
     <section>
-      <div className="mt-8">
+      <div className="mt-8 pt-24">
         <h1 className="text-3xl font-bold mb-4">QuizMaker</h1>
       </div>
       <div>
