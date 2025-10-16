@@ -1,6 +1,13 @@
 import CTAButton from "../components/cta_button";
+import { SignupLoginModal } from "../components/signup_login_modal";
 
-export default function Home() {
+type SearchParamProps = {
+  searchParams: { [key: string]: string | string[] | null | undefined };
+};
+
+export default function Home({ searchParams }: SearchParamProps) {
+  const show = searchParams?.show;
+
   return (
     <section>
       <main>
@@ -8,6 +15,7 @@ export default function Home() {
           <h1 className="text-4xl font-bold ">EZ Quiz Maker AI</h1>
           <CTAButton />
         </div>
+        {show && <SignupLoginModal />}
       </main>
     </section>
   );

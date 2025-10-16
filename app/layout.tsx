@@ -14,8 +14,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <link rel="icon" type="image/x-icon" href="/ez-logo-mini.png" />
       </head>
-      <body className="" suppressHydrationWarning={true}>
-        <Navbar />
+      <body className="">
+        <header>
+          <Navbar />
+        </header>
         <main className="max-w-3xl mx-auto p-6">{children}</main>
       </body>
     </html>
