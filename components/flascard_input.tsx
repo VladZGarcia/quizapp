@@ -12,11 +12,11 @@ export default function FlashcardInput() {
     e.preventDefault();
     // Save input to localStorage and navigate to /flashcards
     try {
-      localStorage.setItem('quiz_input', input);
+      localStorage.setItem("quiz_input", input);
     } catch (e) {
-      console.error('Failed to save input to localStorage', e);
+      console.error("Failed to save input to localStorage", e);
     }
-    router.push('/flashcards');
+    router.push("/flashcards");
   }
 
   return (
@@ -26,18 +26,23 @@ export default function FlashcardInput() {
       </div>
       <div>
         <p className="mb-4">
-          Welcome to QuizMaker! This app helps you create quizzes for studying. Enter a topic and the app will generate quiz questions for you.
+          Welcome to QuizMaker! This app helps you create quizzes for studying.
+          Enter a topic and the app will generate quiz questions for you.
         </p>
-  <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <textarea
-            className="border w-full p-2 mb-4 resize-y max-h-64 min-h-20 overflow-auto"
+            className="border w-full p-2 mb-4 resize-y max-h-64 min-h-20 overflow-auto text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800"
             placeholder="Enter a topic or large text..."
             rows={6}
             value={input}
-            onChange={e => setInput(e.target.value)}
+            onChange={(e) => setInput(e.target.value)}
             required
           />
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded" disabled={loading}>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+            disabled={loading}
+          >
             {loading ? "Analyzing..." : "Generate Flashcards"}
           </button>
         </form>

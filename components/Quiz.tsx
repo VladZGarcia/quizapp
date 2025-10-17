@@ -43,7 +43,7 @@ export default function Quiz() {
     setQuestions(getQuestionsFromLocalStorage());
   }, []);
 
-  const q = questions[index];
+  const question = questions[index];
 
   // Timer effect
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function Quiz() {
     if (selected !== null) return; // prevent double answer
     setSelected(i);
     setShowFeedback(true);
-    if (i === q.answerIndex) setScore((s) => s + 1);
+    if (i === question.answerIndex) setScore((s) => s + 1);
   }
 
   function next() {
@@ -94,9 +94,9 @@ export default function Quiz() {
     }
   }
 
-  if (!q) {
+  if (!question) {
     return (
-      <div className="p-6 bg-white rounded shadow">
+      <div className="p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded shadow">
         <h2 className="text-2xl font-semibold">No quiz questions found</h2>
         <p className="mt-2">Please generate questions first.</p>
       </div>
@@ -105,7 +105,7 @@ export default function Quiz() {
 
   if (finished) {
     return (
-      <div className="p-6 bg-white rounded shadow">
+      <div className="p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded shadow">
         <h2 className="text-2xl font-semibold">Result</h2>
         <p className="mt-2">
           You scored {score} / {questions.length}
@@ -130,26 +130,32 @@ export default function Quiz() {
   }
 
   return (
-    <div className="p-6 bg-white rounded shadow">
-      <h2 className="text-xl font-semibold">{q.text}</h2>
-      <div className="mt-2 text-sm text-gray-500">Time left: {timer}s</div>
+    <div className="p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded shadow">
+      <h2 className="text-xl font-semibold">{question.text}</h2>
+      <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+        Time left: {timer}s
+      </div>
       <div className="mt-4 space-y-2">
-        {q.choices.map((c, i) => (
+        {question.choices.map((c, i) => (
           <button
             key={i}
             onClick={() => choose(i)}
             disabled={selected !== null || showFeedback || timer === 0}
-            className={`block w-full text-left px-4 py-2 border rounded
+            className={`block w-full text-left px-4 py-2 border rounded text-gray-900 dark:text-gray-100
               ${
                 selected === i
-                  ? i === q.answerIndex
-                    ? "bg-green-200"
-                    : "bg-red-200"
-                  : ""
+                  ? i === question.answerIndex
+                    ? "bg-green-200 dark:bg-green-700"
+                    : "bg-red-200 dark:bg-red-700"
+                  : "bg-white dark:bg-gray-700"
               }
-              ${showFeedback && i === q.answerIndex ? "border-green-500" : ""}
+              ${
+                showFeedback && i === question.answerIndex
+                  ? "border-green-500"
+                  : "border-gray-300 dark:border-gray-600"
+              }
               ${selected !== null && selected !== i ? "opacity-60" : ""}
-              hover:bg-gray-100`}
+              hover:bg-gray-100 dark:hover:bg-gray-600`}
           >
             {c}
           </button>
@@ -157,12 +163,14 @@ export default function Quiz() {
       </div>
       {showFeedback && (
         <div className="mt-4">
-          {selected === q.answerIndex ? (
-            <span className="text-green-600 font-semibold">Correct!</span>
+          {selected === question.answerIndex ? (
+            <span className="text-green-600 dark:text-green-400 font-semibold">
+              Correct!
+            </span>
           ) : (
-            <span className="text-red-600 font-semibold">
+            <span className="text-red-600 dark:text-red-400 font-semibold">
               {selected === null ? "Time is up!" : "Incorrect."} Correct answer:{" "}
-              {q.choices[q.answerIndex]}
+              {question.choices[question.answerIndex]}
             </span>
           )}
         </div>
@@ -171,7 +179,7 @@ export default function Quiz() {
         <button
           onClick={prev}
           disabled={index === 0}
-          className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+          className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 disabled:opacity-50"
         >
           Back
         </button>
@@ -183,10 +191,12 @@ export default function Quiz() {
             {index + 1 === questions.length ? "Finish" : "Next"}
           </button>
         ) : (
-          <span className="text-sm text-gray-500">Select an answer</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            Select an answer
+          </span>
         )}
       </div>
-      <div className="mt-4 text-sm text-gray-500">
+      <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
         Question {index + 1} / {questions.length}
       </div>
     </div>

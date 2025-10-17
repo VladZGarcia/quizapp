@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 
-
-
 export default function HandleInput() {
   const [response, setResponse] = useState<string | null>(null);
   const [input, setInput] = useState<string>("");
@@ -73,10 +71,10 @@ export default function HandleInput() {
 
   return (
     <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-4">Quiz Generation</h2>
+      <h2 className="text-2xl font-bold mb-4">Quiz Generator</h2>
       <div className="mb-2">
         <span className="font-semibold">Input:</span>
-        <pre className="bg-gray-100 p-2 rounded whitespace-pre-wrap break-words max-h-32 overflow-auto">
+        <pre className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-2 rounded whitespace-pre-wrap break-words max-h-32 overflow-auto">
           {input}
         </pre>
       </div>
@@ -87,7 +85,7 @@ export default function HandleInput() {
       {response && (
         <div className="mt-4">
           <span className="font-semibold">AI Response:</span>
-          <pre className="bg-gray-100 p-2 rounded whitespace-pre-wrap break-words max-h-64 overflow-auto">
+          <pre className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-2 rounded whitespace-pre-wrap break-words max-h-64 overflow-auto">
             {response}
           </pre>
         </div>
