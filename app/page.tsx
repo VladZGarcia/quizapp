@@ -5,8 +5,9 @@ type SearchParamProps = {
   searchParams: { [key: string]: string | string[] | null | undefined };
 };
 
-export default function Home({ searchParams }: SearchParamProps) {
-  const show = searchParams?.show;
+export default async function Home({ searchParams }: SearchParamProps) {
+  const params = await searchParams;
+  const show = params?.show;
 
   return (
     <section>
