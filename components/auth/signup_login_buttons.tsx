@@ -1,11 +1,10 @@
-import Link from "next/link";
+
 import {
   SignInButton,
   SignUpButton,
   SignedIn,
   SignedOut,
   UserButton,
-  SignOutButton,
 } from "@clerk/nextjs";
 
 export default function SignupLoginButtons() {
@@ -24,19 +23,4 @@ export default function SignupLoginButtons() {
       </SignedIn>
     </header>
   );
-}
-
-{
-  /* <div className="space-x-4">
-          <Link href="/?show=true">
-            <button className="bg-blue-800 text-white px-4 py-2 rounded-xl hover:bg-blue-700">
-              Sign up
-            </button>
-          </Link>
-          <Link href="/?show=true">
-            <button className="bg-blue-800 text-white px-4 py-2 rounded-xl hover:bg-blue-700">
-              Log in
-            </button>
-          </Link>
-      </div> */
 }

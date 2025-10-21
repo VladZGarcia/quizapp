@@ -1,7 +1,6 @@
 "use client";
-import { useSearchParams } from "next/navigation";
-import HandleInput from "../../components/handle_input";
-import Quiz from "../../components/Quiz";
+import HandleInput from "../../components/quiz/handle_input";
+import Quiz from "../../components/quiz/Quiz";
 
 export default function FlashcardsPage() {
   return (

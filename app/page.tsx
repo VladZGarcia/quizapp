@@ -1,5 +1,5 @@
-import CTAButton from "../components/cta_button";
-import { SignupLoginModal } from "../components/signup_login_modal";
+import { CTAButton } from "../components/shared";
+import { SignupLoginModal } from "../components/auth";
 
 type SearchParamProps = {
   searchParams: { [key: string]: string | string[] | null | undefined };
@@ -12,7 +12,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
   return (
     <section>
       <main>
-        <div className="flex min-h-screen flex-col items-center justify-center p-24">
+        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-16rem)] space-y-6">
           <h1 className="text-4xl font-bold ">EZ Quiz Maker AI</h1>
           <CTAButton />
         </div>
