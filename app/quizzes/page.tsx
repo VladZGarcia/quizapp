@@ -4,9 +4,9 @@ import Quiz from "../../components/quiz/Quiz";
 
 export default function FlashcardsPage() {
   return (
-    <div>
+    <div className="min-h-[calc(100vh-10rem)] flex flex-col justify-center space-x-6">
       <HandleInput />
-      <p className="text-3xl font-bold mb-4">Quiz</p>
+      <p className="text-xl font-bold mb-4">Quiz</p>
       <Quiz />
     </div>
   );
