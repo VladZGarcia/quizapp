@@ -2,7 +2,7 @@ import { CTAButton } from "../components/shared";
 import { SignupLoginModal } from "../components/auth";
 
 type SearchParamProps = {
-  searchParams: { [key: string]: string | string[] | null | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export default async function Home({ searchParams }: SearchParamProps) {

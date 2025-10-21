@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="bg-gray-100 max-w-4xl mx-auto dark:bg-gray-900 text-gray-900 dark:text-gray-100 py-6 mt-12">
@@ -7,15 +9,18 @@ export default function Footer() {
           reserved.
         </p>
         <div className="mt-2 flex justify-center gap-4 text-sm">
-          <a href="/about" className="hover:text-blue-500">
+          <Link href="/about" className="hover:text-blue-500 transition-colors">
             About
-          </a>
-          <a href="/privacy" className="hover:text-blue-500">
+          </Link>
+          <Link href="/contact" className="hover:text-blue-500 transition-colors">
+            Contact
+          </Link>
+          <Link href="/privacy" className="hover:text-blue-500 transition-colors">
             Privacy
-          </a>
-          <a href="/terms" className="hover:text-blue-500">
+          </Link>
+          <Link href="/terms" className="hover:text-blue-500 transition-colors">
             Terms
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
