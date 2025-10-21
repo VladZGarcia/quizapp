@@ -7,6 +7,7 @@ export default function HandleInput() {
   const [input, setInput] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showInput, setShowInput] = useState(false);
 
   useEffect(() => {
     // Read input from localStorage
@@ -26,6 +27,8 @@ export default function HandleInput() {
     setError(null);
     const fetchData = async () => {
       setLoading(true);
+      // Dispatch event to signal generation started
+      window.dispatchEvent(new CustomEvent("quizGenerationStart"));
       try {
         const res = await fetch("/api/cohere", {
           method: "POST",
@@ -63,6 +66,9 @@ export default function HandleInput() {
           // fallback: save the whole response if JSON not found
           localStorage.setItem("quiz_response", response);
         }
+        // Dispatch custom event to signal quiz is ready
+        console.log("Quiz generated, dispatching event");
+        window.dispatchEvent(new CustomEvent("quizGenerated"));
       } catch (e) {
         console.error("Failed to save response to localStorage", e);
       }
@@ -70,26 +76,27 @@ export default function HandleInput() {
   }, [response]);
 
   return (
-    <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-4">Quiz Generator</h2>
-      <div className="mb-2">
-        <span className="font-semibold">Input:</span>
-        <pre className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-2 rounded whitespace-pre-wrap break-words max-h-32 overflow-auto">
-          {input}
-        </pre>
-      </div>
+    <div className="mt-8 p-6">
+      <h2 className="text-3xl font-bold mb-4">Quiz Generator</h2>
+      <button
+        onClick={() => setShowInput(!showInput)}
+        className="mb-2 px-4 py-2 bg-blue-800 text-white rounded hover:bg-blue-700 transition-colors"
+      >
+        {showInput ? "Hide Input" : "Check Input"}
+      </button>
+      {showInput && (
+        <div className="mb-2 mt-2">
+          <span className="font-semibold">Input:</span>
+          <pre className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-2 rounded whitespace-pre-wrap break-words max-h-32 overflow-auto">
+            {input}
+          </pre>
+        </div>
+      )}
       {loading && (
         <p className="text-blue-500">Generating quiz with Cohere AI...</p>
       )}
       {error && <p className="text-red-500">{error}</p>}
-      {response && (
-        <div className="mt-4">
-          <span className="font-semibold">AI Response:</span>
-          <pre className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-2 rounded whitespace-pre-wrap break-words max-h-64 overflow-auto">
-            {response}
-          </pre>
-        </div>
-      )}
+      
     </div>
   );
 }

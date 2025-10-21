@@ -18,15 +18,7 @@ function getQuestionsFromLocalStorage(): Question[] {
       console.error("Failed to parse quiz_response:", e);
     }
   }
-  return [
-    { id: 1, text: "What is 2 + 2?", choices: ["3", "4", "5"], answerIndex: 1 },
-    {
-      id: 2,
-      text: "What is the capital of France?",
-      choices: ["Berlin", "Madrid", "Paris"],
-      answerIndex: 2,
-    },
-  ];
+  return [];
 }
 
 export default function Quiz() {
@@ -40,7 +32,9 @@ export default function Quiz() {
   const [totalTime, setTotalTime] = useState(0); // total time spent
 
   useEffect(() => {
-    setQuestions(getQuestionsFromLocalStorage());
+    const loadedQuestions = getQuestionsFromLocalStorage();
+    console.log("Loaded questions:", loadedQuestions);
+    setQuestions(loadedQuestions);
   }, []);
 
   const question = questions[index];
@@ -112,7 +106,7 @@ export default function Quiz() {
         </p>
         <p className="mt-2">Total time: {totalTime} seconds</p>
         <button
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           onClick={() => {
             setIndex(0);
             setScore(0);
@@ -123,7 +117,7 @@ export default function Quiz() {
             setTotalTime(0);
           }}
         >
-          Restart
+          Restart Quiz
         </button>
       </div>
     );
@@ -131,6 +125,7 @@ export default function Quiz() {
 
   return (
     <div className="p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded shadow">
+      <p className="text-xl font-bold mb-4">Quiz</p>
       <h2 className="text-xl font-semibold">{question.text}</h2>
       <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">
         Time left: {timer}s

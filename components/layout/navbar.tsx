@@ -14,6 +14,7 @@ export default function Navbar() {
                 alt="quiz-maker-logo"
                 width={280}
                 height={28}
+                priority
                 className="h-7 w-70 mt-3"
                 style={{ filter: "invert(1) brightness(2)" }}
               />
