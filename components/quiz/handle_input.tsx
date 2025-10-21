@@ -27,6 +27,8 @@ export default function HandleInput() {
     setError(null);
     const fetchData = async () => {
       setLoading(true);
+      // Dispatch event to signal generation started
+      window.dispatchEvent(new CustomEvent("quizGenerationStart"));
       try {
         const res = await fetch("/api/cohere", {
           method: "POST",
@@ -64,6 +66,9 @@ export default function HandleInput() {
           // fallback: save the whole response if JSON not found
           localStorage.setItem("quiz_response", response);
         }
+        // Dispatch custom event to signal quiz is ready
+        console.log("Quiz generated, dispatching event");
+        window.dispatchEvent(new CustomEvent("quizGenerated"));
       } catch (e) {
         console.error("Failed to save response to localStorage", e);
       }
@@ -71,7 +76,7 @@ export default function HandleInput() {
   }, [response]);
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 p-6">
       <h2 className="text-3xl font-bold mb-4">Quiz Generator</h2>
       <button
         onClick={() => setShowInput(!showInput)}
@@ -91,14 +96,7 @@ export default function HandleInput() {
         <p className="text-blue-500">Generating quiz with Cohere AI...</p>
       )}
       {error && <p className="text-red-500">{error}</p>}
-      {/* {response && (
-        <div className="mt-4">
-          <span className="font-semibold">AI Response:</span>
-          <pre className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-2 rounded whitespace-pre-wrap break-words max-h-64 overflow-auto">
-            {response}
-          </pre>
-        </div>
-      )} */}
+      
     </div>
   );
 }
