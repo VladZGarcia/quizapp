@@ -9,7 +9,7 @@ export default function FormCard() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("new");
   const router = useRouter();
-  const maxChars = 5000;
+  const maxChars = 15000;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

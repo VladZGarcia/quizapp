@@ -1,5 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useSaveQuiz } from "@/hooks/useSaveQuiz";
+import { useUser } from "@clerk/nextjs";
 
 type Question = {
   id: number;
@@ -30,6 +32,11 @@ export default function Quiz() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [timer, setTimer] = useState(15); // seconds per question
   const [totalTime, setTotalTime] = useState(0); // total time spent
+  const [isSaved, setIsSaved] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  const { saveQuiz } = useSaveQuiz();
+  const { user } = useUser();
 
   useEffect(() => {
     const loadedQuestions = getQuestionsFromLocalStorage();
@@ -88,6 +95,27 @@ export default function Quiz() {
     }
   }
 
+  async function handleSaveQuiz() {
+    if (!user) {
+      setSaveError("Please sign in to save quizzes");
+      return;
+    }
+
+    try {
+      setSaveError(null);
+      const inputText = localStorage.getItem("quiz_input") || "";
+      const quizTitle = `Quiz - ${new Date().toLocaleDateString()}`;
+
+      await saveQuiz(quizTitle, inputText, questions);
+      setIsSaved(true);
+
+      // Show success message for 3 seconds
+      setTimeout(() => setIsSaved(false), 3000);
+    } catch (error: any) {
+      setSaveError(error.message || "Failed to save quiz");
+    }
+  }
+
   if (!question) {
     return (
       <div className="p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded shadow">
@@ -105,27 +133,69 @@ export default function Quiz() {
           You scored {score} / {questions.length}
         </p>
         <p className="mt-2">Total time: {totalTime} seconds</p>
-        <button
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          onClick={() => {
-            setIndex(0);
-            setScore(0);
-            setFinished(false);
-            setSelected(null);
-            setShowFeedback(false);
-            setTimer(15);
-            setTotalTime(0);
-          }}
-        >
-          Restart Quiz
-        </button>
+        <div className="flex justify-between items-center mt-4 space-x-4">
+          <button
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={() => {
+              setIndex(0);
+              setScore(0);
+              setFinished(false);
+              setSelected(null);
+              setShowFeedback(false);
+              setTimer(15);
+              setTotalTime(0);
+            }}
+          >
+            Restart Quiz
+          </button>
+          {user && (
+            <button
+              onClick={handleSaveQuiz}
+              disabled={isSaved}
+              className={`px-4 mt-4 py-2 rounded text-white transition-colors ${
+                isSaved
+                  ? "bg-green-500 cursor-not-allowed"
+                  : "bg-purple-600 hover:bg-purple-700"
+              }`}
+            >
+              {isSaved ? "✓ Saved!" : "Save Quiz"}
+            </button>
+          )}
+          {saveError && (
+            <div className="mb-4 p-2 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded">
+              {saveError}
+            </div>
+          )}
+        </div>
       </div>
     );
   }
 
   return (
     <div className="p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded shadow">
-      <p className="text-xl font-bold mb-4">Quiz</p>
+      <div className="flex justify-between items-center mb-4">
+        <p className="text-xl font-bold">Quiz</p>
+        {user && (
+          <button
+            onClick={handleSaveQuiz}
+            disabled={isSaved}
+            className={`px-4 py-2 rounded text-white transition-colors ${
+              isSaved
+                ? "bg-green-500 cursor-not-allowed"
+                : "bg-purple-600 hover:bg-purple-700"
+            }`}
+          >
+            {isSaved ? "✓ Saved!" : "Save Quiz"}
+          </button>
+        )}
+      </div>
+
+      {saveError && (
+        <div className="mb-4 p-2 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded">
+          {saveError}
+        </div>
+      )}
+
       <h2 className="text-xl font-semibold">{question.text}</h2>
       <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">
         Time left: {timer}s

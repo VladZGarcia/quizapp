@@ -15,16 +15,45 @@ export async function POST(req: NextRequest) {
     if (!apiKey) {
       return NextResponse.json({ error: 'Missing Cohere API key' }, { status: 500 });
     }
-    const prompt = `Create a set of quiz questions in the following JSON format:
-  [
-    {
-    "id": number,
-    "text": "question text",
-    "choices": ["answer 1", "answer 2", "answer 3"],
-    "answerIndex": correct answer index
+    
+    // Calculate number of questions based on input length
+    const wordCount = input.trim().split(/\s+/).length;
+    let numQuestions;
+    
+    if (wordCount < 100) {
+      numQuestions = 5;
+    } else if (wordCount < 300) {
+      numQuestions = 10;
+    } else if (wordCount < 500) {
+      numQuestions = 15;
+    } else if (wordCount < 1000) {
+      numQuestions = 20;
+    } else {
+      numQuestions = Math.min(30, Math.floor(wordCount / 50)); // Max 30 questions
     }
-  ]
-  Based on the following text: ${input}`;
+    
+    const prompt = `Create exactly ${numQuestions} quiz questions based on the input text below. The questions should comprehensively cover all major topics and concepts in the text.
+
+IMPORTANT REQUIREMENTS:
+- Generate EXACTLY ${numQuestions} questions
+- Cover the ENTIRE text, not just the beginning
+- Vary difficulty levels (easy, medium, hard)
+- Randomize the position of correct answers
+- Make questions specific and detailed
+- Include questions from ALL sections of the text
+
+Return the questions in this exact JSON format:
+[
+  {
+    "id": 1,
+    "text": "question text",
+    "choices": ["answer 1", "answer 2", "answer 3", "answer 4"],
+    "answerIndex": 0
+  }
+]
+
+INPUT TEXT (${wordCount} words):
+${input}`;
     let cohereRes;
     try {
       cohereRes = await cohere.chat({
