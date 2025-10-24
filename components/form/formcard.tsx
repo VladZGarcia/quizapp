@@ -54,7 +54,7 @@ export default function FormCard() {
   }
 
   return (
-    <div className="flex flex-col w-full max-w-3xl bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+    <div className="flex flex-col w-full max-w-3xl bg-gray-50 dark:bg-gray-800 p-6 rounded-xl shadow">
       <TabButtons activeTab={activeTab} onTabChange={setActiveTab} />
       <hr className="mb-6 border-gray-300 dark:border-gray-600" />
 
@@ -69,7 +69,7 @@ export default function FormCard() {
         <div className="flex justify-center p-4">
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 text-xs rounded hover:bg-blue-600 transition-colors"
+            className="bg-gray-500 dark:bg-yellow-600 text-white px-4 py-2 text-xs rounded hover:bg-gray-400 dark:hover:bg-yellow-500 transition-colors"
             disabled={loading}
           >
             {loading ? "Analyzing..." : "Generate Flashcards"}

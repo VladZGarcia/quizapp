@@ -3,12 +3,17 @@ import "./globals.css";
 import { ReactNode } from "react";
 import { type Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, TikTok_Sans } from "next/font/google";
 import { UserSyncWrapper } from "@/components/auth";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const tikTokSans = TikTok_Sans({
+  variable: "--font-tiktok-sans",
   subsets: ["latin"],
 });
 
@@ -33,15 +38,15 @@ export default function RootLayout({
           <link rel="icon" type="image/x-icon" href="/ez-logo-mini.png" />
         </head>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} ${tikTokSans.variable} antialiased bg-gray-300 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors`}
           suppressHydrationWarning
         >
           <ThemeProvider>
             <UserSyncWrapper>
-              <header className="flex justify-end items-center p-4 gap-4 h-16">
-                <Navbar />
-              </header>
-              <main className="max-w-4xl mx-auto p-6 ">{children}</main>
+              <Navbar />
+              <main className="pt-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+                {children}
+              </main>
               <Footer />
             </UserSyncWrapper>
           </ThemeProvider>

@@ -5,28 +5,30 @@ import { ThemeToggle } from "../ThemeToggle";
 
 export default function Navbar() {
   return (
-    <nav className="shadow p-4">
-      <header className="bg-white max-w-4xl mx-auto dark:bg-gray-900 shadow p-2 fixed top-0 left-0 right-0 z-50">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-1">
-            <Link href="/">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm transition-colors">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
               <Image
                 src="/ez-logo.png"
-                alt="quiz-maker-logo"
-                width={280}
+                alt="EZ Quiz Maker"
+                width={200}
                 height={28}
                 priority
-                className="h-7 w-70 mt-3"
-                style={{ filter: "invert(1) brightness(2)" }}
+                className="h-7 w-auto dark:invert dark:brightness-200"
               />
             </Link>
           </div>
-          <div className="flex items-center gap-4">
+
+          {/* Right side - Theme Toggle & Auth Buttons */}
+          <div className="flex items-center gap-3">
             <ThemeToggle />
             <SignupLoginButtons />
           </div>
         </div>
-      </header>
+      </div>
     </nav>
   );
 }
