@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, systemTheme } = useTheme();
 
   // Avoid hydration mismatch
   useEffect(() => setMounted(true), []);
@@ -15,11 +15,24 @@ export function ThemeToggle() {
     );
   }
 
-  const isDark = theme === "dark";
+  // Determine actual theme (resolving 'system' to actual theme)
+  const resolvedTheme = theme === "system" ? systemTheme : theme;
+  const isDark = resolvedTheme === "dark";
+
+  const toggleTheme = () => {
+    // Cycle through: system → light → dark → system
+    if (theme === "system") {
+      setTheme("light");
+    } else if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("system");
+    }
+  };
 
   return (
     <button
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={toggleTheme}
       className={`
         relative inline-flex items-center h-8 w-14 rounded-full
         transition-colors duration-300 ease-in-out
@@ -28,7 +41,9 @@ export function ThemeToggle() {
         focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2
       `}
       aria-label="Toggle theme"
-      title={`Switch to ${isDark ? "light" : "dark"} mode`}
+      title={`Current: ${theme} mode${
+        theme === "system" ? ` (${resolvedTheme})` : ""
+      }`}
       role="switch"
       aria-checked={isDark}
     >
@@ -40,7 +55,11 @@ export function ThemeToggle() {
           ${isDark ? "translate-x-7" : "translate-x-1"}
         `}
       >
-        {isDark ? (
+        {theme === "system" ? (
+          <span className="text-xs" role="img" aria-label="System mode">
+            💻
+          </span>
+        ) : isDark ? (
           <span className="text-sm" role="img" aria-label="Dark mode">
             🌙
           </span>

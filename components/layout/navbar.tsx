@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SignupLoginButtons } from "../auth";
-import { ThemeToggle } from "../ThemeToggle";
 
 export default function Navbar() {
   return (
@@ -22,9 +21,8 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Right side - Theme Toggle & Auth Buttons */}
+          {/* Right side - Auth Buttons */}
           <div className="flex items-center gap-3">
-            <ThemeToggle />
             <SignupLoginButtons />
           </div>
         </div>
