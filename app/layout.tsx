@@ -28,15 +28,15 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <head>
-          <link rel="icon" type="image/x-icon" href="/ez-logo-mini.png" />
-        </head>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-300 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors`}
-          suppressHydrationWarning
-        >
-          <ThemeProvider>
+      <ThemeProvider>
+        <html lang="en" suppressHydrationWarning>
+          <head>
+            <link rel="icon" type="image/x-icon" href="/ez-logo-mini.png" />
+          </head>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors`}
+            suppressHydrationWarning
+          >
             <UserSyncWrapper>
               <Navbar />
               <main className="pt-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
@@ -44,9 +44,9 @@ export default function RootLayout({
               </main>
               <Footer />
             </UserSyncWrapper>
-          </ThemeProvider>
-        </body>
-      </html>
+          </body>
+        </html>
+      </ThemeProvider>
     </ClerkProvider>
   );
 }
