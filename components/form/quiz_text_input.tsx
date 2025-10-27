@@ -15,15 +15,14 @@ export default function QuizTextInput({
   onSampleClick,
 }: QuizTextInputProps) {
   return (
-    <div>
-      <div className="flex justify-between items-center">
+    <div className="flex flex-col flex-1">
+      <div className="flex justify-between items-center mb-2">
         <p className="text-sm text-gray-500 dark:text-gray-400">Text to use</p>
         <CharacterCounter currentLength={value.length} maxLength={maxChars} />
       </div>
       <textarea
-        className="border rounded-lg w-full p-2 mb-1 resize-y max-h-64 min-h-20 overflow-auto text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800"
+        className="border rounded-lg w-full p-2 mb-2 flex-1 resize-none overflow-auto text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         placeholder="Copy & paste text here to generate quiz questions ..."
-        rows={6}
         value={value}
         onChange={onChange}
         required

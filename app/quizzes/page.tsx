@@ -29,7 +29,6 @@ export default function FlashcardsPage() {
 
     // Listen for custom event from HandleInput when quiz is generated
     const handleQuizGenerated = () => {
-      console.log("Quiz generated event received");
       setIsLoading(false);
       setHasQuestions(true);
       setKey((prev) => prev + 1); // Force Quiz component to remount with new data
