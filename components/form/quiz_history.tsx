@@ -44,6 +44,7 @@ export default function QuizHistory() {
     // Store quiz data in localStorage
     localStorage.setItem("quiz_input", quiz.input_text);
     localStorage.setItem("quiz_questions", JSON.stringify(quiz.questions));
+    localStorage.setItem("quiz_already_saved", "true"); // Mark as already saved
 
     // Navigate to quiz page
     router.push("/quizzes");

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSaveQuiz } from "@/hooks/useSaveQuiz";
 import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 type Question = {
   id: number;
@@ -34,13 +35,22 @@ export default function Quiz() {
   const [totalTime, setTotalTime] = useState(0); // total time spent
   const [isSaved, setIsSaved] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [isAlreadySaved, setIsAlreadySaved] = useState(false);
 
   const { saveQuiz } = useSaveQuiz();
   const { user } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     const loadedQuestions = getQuestionsFromLocalStorage();
     setQuestions(loadedQuestions);
+    
+    // Check if this quiz is already saved
+    const alreadySaved = localStorage.getItem("quiz_already_saved");
+    if (alreadySaved === "true") {
+      setIsAlreadySaved(true);
+      localStorage.removeItem("quiz_already_saved"); // Clean up
+    }
   }, []);
 
   const question = questions[index];
@@ -103,7 +113,22 @@ export default function Quiz() {
     try {
       setSaveError(null);
       const inputText = localStorage.getItem("quiz_input") || "";
-      const quizTitle = `Quiz - ${new Date().toLocaleDateString()}`;
+
+      // Generate a relevant title from the input text
+      let titlePrefix = "Quiz";
+      if (inputText) {
+        // Get first 50 characters and clean it up
+        const preview = inputText.substring(0, 50).trim();
+        // Take first sentence or first few words
+        const words = preview.split(/\s+/).slice(0, 6).join(" ");
+        titlePrefix = words.length > 0 ? words : "Quiz";
+        // Add ellipsis if truncated
+        if (inputText.length > 50) {
+          titlePrefix += "...";
+        }
+      }
+
+      const quizTitle = `${titlePrefix} - ${new Date().toLocaleDateString()}`;
 
       await saveQuiz(quizTitle, inputText, questions);
       setIsSaved(true);
@@ -132,36 +157,54 @@ export default function Quiz() {
           You scored {score} / {questions.length}
         </p>
         <p className="mt-2">Total time: {totalTime} seconds</p>
-        <div className="flex justify-between items-center mt-4 space-x-4">
-          <button
-            className="mt-4 px-4 py-2 bg-gray-500 dark:bg-yellow-600 text-white rounded hover:bg-gray-400 dark:hover:bg-yellow-500"
-            onClick={() => {
-              setIndex(0);
-              setScore(0);
-              setFinished(false);
-              setSelected(null);
-              setShowFeedback(false);
-              setTimer(15);
-              setTotalTime(0);
-            }}
-          >
-            Restart Quiz
-          </button>
-          {user && (
+
+        {!user && (
+          <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+            <p className="text-sm text-blue-700 dark:text-blue-300">
+              💡 <strong>Sign in</strong> to save your quizzes and access them
+              later from the History tab!
+            </p>
+          </div>
+        )}
+
+        <div className="mt-4 space-y-3">
+          <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
             <button
-              onClick={handleSaveQuiz}
-              disabled={isSaved}
-              className={`px-4 mt-4 py-2 rounded text-white transition-colors ${
-                isSaved
-                  ? "bg-green-500 cursor-not-allowed"
-                  : "bg-purple-600 hover:bg-purple-700"
-              }`}
+              className="px-4 py-2 bg-gray-500 dark:bg-yellow-600 text-white rounded hover:bg-gray-400 dark:hover:bg-yellow-500"
+              onClick={() => {
+                setIndex(0);
+                setScore(0);
+                setFinished(false);
+                setSelected(null);
+                setShowFeedback(false);
+                setTimer(15);
+                setTotalTime(0);
+              }}
             >
-              {isSaved ? "✓ Saved!" : "Save Quiz"}
+              Restart Quiz
             </button>
-          )}
+            <button
+              onClick={() => router.push("/quizInput")}
+              className="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded hover:bg-blue-500 dark:hover:bg-blue-600"
+            >
+              Back to Input
+            </button>
+            {user && !isAlreadySaved && (
+              <button
+                onClick={handleSaveQuiz}
+                disabled={isSaved}
+                className={`px-4 py-2 rounded text-white transition-colors ${
+                  isSaved
+                    ? "bg-green-500 cursor-not-allowed"
+                    : "bg-purple-600 hover:bg-purple-700"
+                }`}
+              >
+                {isSaved ? "✓ Saved!" : "Save Quiz"}
+              </button>
+            )}
+          </div>
           {saveError && (
-            <div className="mb-4 p-2 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded">
+            <div className="p-2 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded">
               {saveError}
             </div>
           )}
@@ -174,7 +217,7 @@ export default function Quiz() {
     <div className="p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded shadow">
       <div className="flex justify-between items-center mb-4">
         <p className="text-xl font-bold">Quiz</p>
-        {user && (
+        {user && !isAlreadySaved ? (
           <button
             onClick={handleSaveQuiz}
             disabled={isSaved}
@@ -186,7 +229,11 @@ export default function Quiz() {
           >
             {isSaved ? "✓ Saved!" : "Save Quiz"}
           </button>
-        )}
+        ) : !isAlreadySaved ? (
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 italic">
+            Sign in to save quizzes
+          </p>
+        ) : null}
       </div>
 
       {saveError && (
