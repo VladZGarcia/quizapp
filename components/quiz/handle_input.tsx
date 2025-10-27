@@ -10,6 +10,15 @@ export default function HandleInput() {
   const [showInput, setShowInput] = useState(false);
 
   useEffect(() => {
+    // Check if there are already saved questions from history
+    const savedQuestions = localStorage.getItem("quiz_questions");
+    if (savedQuestions) {
+      // Use saved questions instead of generating new ones
+      setResponse(savedQuestions);
+      localStorage.removeItem("quiz_questions"); // Clean up after using
+      return;
+    }
+
     // Read input from localStorage
     const saved = localStorage.getItem("quiz_input") || "";
     setInput(saved);
@@ -67,7 +76,6 @@ export default function HandleInput() {
           localStorage.setItem("quiz_response", response);
         }
         // Dispatch custom event to signal quiz is ready
-        console.log("Quiz generated, dispatching event");
         window.dispatchEvent(new CustomEvent("quizGenerated"));
       } catch (e) {
         console.error("Failed to save response to localStorage", e);

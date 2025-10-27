@@ -10,7 +10,6 @@ export default function TabButtons({
   const tabs = [
     { id: "new", label: "New quiz" },
     { id: "history", label: "History" },
-    { id: "saved", label: "Saved quizzes" },
   ];
 
   return (

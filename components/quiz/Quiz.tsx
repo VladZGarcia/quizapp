@@ -40,7 +40,6 @@ export default function Quiz() {
 
   useEffect(() => {
     const loadedQuestions = getQuestionsFromLocalStorage();
-    console.log("Loaded questions:", loadedQuestions);
     setQuestions(loadedQuestions);
   }, []);
 
