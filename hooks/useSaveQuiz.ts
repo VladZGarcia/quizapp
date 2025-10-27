@@ -1,11 +1,12 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
+import { useCallback } from "react";
 
 export function useSaveQuiz() {
   const { user } = useUser();
 
-  const saveQuiz = async (title: string, inputText: string, questions: any[]) => {
+  const saveQuiz = useCallback(async (title: string, inputText: string, questions: any[]) => {
     if (!user) {
       throw new Error("You must be signed in to save quizzes");
     }
@@ -33,9 +34,9 @@ export function useSaveQuiz() {
       console.error("Error saving quiz:", error);
       throw error;
     }
-  };
+  }, [user]);
 
-  const getQuizzes = async () => {
+  const getQuizzes = useCallback(async () => {
     if (!user) return [];
 
     try {
@@ -51,7 +52,7 @@ export function useSaveQuiz() {
       console.error("Error fetching quizzes:", error);
       return [];
     }
-  };
+  }, [user]);
 
   return { saveQuiz, getQuizzes };
 }

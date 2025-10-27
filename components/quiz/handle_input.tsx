@@ -8,6 +8,7 @@ export default function HandleInput() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showInput, setShowInput] = useState(false);
+  const [shouldGenerate, setShouldGenerate] = useState(false);
 
   useEffect(() => {
     // Check if there are already saved questions from history
@@ -16,15 +17,28 @@ export default function HandleInput() {
       // Use saved questions instead of generating new ones
       setResponse(savedQuestions);
       localStorage.removeItem("quiz_questions"); // Clean up after using
+      setLoading(false);
+
+      // Also load the input text for display
+      const saved = localStorage.getItem("quiz_input") || "";
+      setInput(saved);
+      // Don't generate - we already have the quiz
+      setShouldGenerate(false);
       return;
     }
 
-    // Read input from localStorage
+    // Read input from localStorage and prepare to generate
     const saved = localStorage.getItem("quiz_input") || "";
     setInput(saved);
+    setShouldGenerate(true);
   }, []);
 
   useEffect(() => {
+    // Only run if we should generate
+    if (!shouldGenerate) {
+      return;
+    }
+
     if (!input || input.trim().length === 0) {
       setError(
         "No input provided. Please enter text to generate quiz questions."
@@ -54,7 +68,7 @@ export default function HandleInput() {
       }
     };
     fetchData();
-  }, [input]);
+  }, [input, shouldGenerate]);
 
   // Extract JSON from Cohere response and save only the JSON array as quiz_response
   function extractJsonFromCohereResponse(resp: string): string | null {
@@ -100,11 +114,10 @@ export default function HandleInput() {
           </pre>
         </div>
       )}
-      {loading && (
-        <p className="text-blue-500">Generating quiz with Cohere AI...</p>
-      )}
+      {/* {loading && shouldGenerate && (
+        <p className="text-blue-500">Generating quiz...</p>
+      )} */}
       {error && <p className="text-red-500">{error}</p>}
-      
     </div>
   );
 }

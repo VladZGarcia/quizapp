@@ -57,7 +57,7 @@ export default function FlashcardsPage() {
             <div className="absolute top-0 left-0 w-full h-full border-4 border-blue-600 rounded-full animate-spin border-t-transparent"></div>
           </div>
           <p className="mt-6 text-lg font-semibold text-gray-700 dark:text-gray-300">
-            Generating your quiz questions...
+            Generating with Cohere AI.
           </p>
           <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
             This may take a few moments
