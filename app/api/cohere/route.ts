@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       numQuestions = Math.min(30, Math.floor(wordCount / 50)); // Max 30 questions
     }
     
-    const prompt = `Create exactly ${numQuestions} quiz questions based on the input text below. The questions should comprehensively cover all major topics and concepts in the text.
+    const prompt = `Create exactly ${numQuestions} quiz questions based on the input text below. The questions should comprehensively cover all major topics and concepts in the text. Its important that the quiz uses the same language as the input text to ensure clarity and relevance.
 
 IMPORTANT REQUIREMENTS:
 - Generate EXACTLY ${numQuestions} questions
