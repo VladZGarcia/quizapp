@@ -21,7 +21,7 @@ export default function SignupLoginButtons() {
           </button>
         </SignInButton>
         <SignUpButton mode="modal" forceRedirectUrl={pathname}>
-          <button className="px-4 py-2 bg-gray-500 dark:bg-yellow-600 text-white font-semibold text-sm rounded-lg hover:bg-gray-400 dark:hover:bg-yellow-500 transition-all duration-200 shadow-sm hover:shadow-md">
+          <button className="px-4 py-2 bg-yellow-500 dark:bg-yellow-600 text-white font-semibold text-sm rounded-lg hover:bg-yellow-400 dark:hover:bg-yellow-500 transition-all duration-200 shadow-sm hover:shadow-md">
             Sign Up
           </button>
         </SignUpButton>
@@ -31,7 +31,7 @@ export default function SignupLoginButtons() {
           appearance={{
             elements: {
               avatarBox:
-                "w-9 h-9 ring-2 ring-gray-200 dark:ring-gray-700 hover:ring-blue-500 dark:hover:ring-blue-400 transition-all",
+                "w-9 h-9 ring-2 ring-yellow-500 dark:ring-yellow-600 hover:ring-yellow-400 dark:hover:ring-yellow-500 transition-all",
             },
           }}
         />

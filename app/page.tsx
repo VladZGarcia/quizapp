@@ -1,14 +1,6 @@
 import { CTAButton } from "../components/shared";
-import { SignupLoginModal } from "../components/auth";
 
-type SearchParamProps = {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
-
-export default async function Home({ searchParams }: SearchParamProps) {
-  const params = await searchParams;
-  const show = params?.show;
-
+export default async function Home() {
   return (
     <section>
       <main>
@@ -16,7 +8,6 @@ export default async function Home({ searchParams }: SearchParamProps) {
           <h1 className="text-2xl sm:text-4xl font-bold ">EZ Quiz Maker AI</h1>
           <CTAButton />
         </div>
-        {show && <SignupLoginModal />}
       </main>
     </section>
   );
