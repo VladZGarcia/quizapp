@@ -6,7 +6,13 @@ import QuizTextInput from "./quiz_text_input";
 import QuizHistory from "./quiz_history";
 
 export default function FormCard() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(() => {
+    // Initialize with saved input if it exists
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("quiz_input") || "";
+    }
+    return "";
+  });
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("new");
   const router = useRouter();
@@ -71,11 +77,22 @@ export default function FormCard() {
               />
             </div>
 
-            <div className="flex justify-center p-4 mt-4">
+            <div className="flex justify-center gap-4 p-4 mt-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setInput("");
+                  localStorage.removeItem("quiz_input");
+                }}
+                className="bg-gray-500 dark:bg-gray-600 text-white font-semibold text-sm px-8 py-2 rounded hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors"
+                disabled={loading || !input}
+              >
+                Clear Input
+              </button>
               <button
                 type="submit"
                 className="bg-yellow-500 dark:bg-yellow-600 text-white font-semibold text-sm px-8 py-2 rounded hover:bg-yellow-400 dark:hover:bg-yellow-500 transition-colors"
-                disabled={loading}
+                disabled={loading || !input}
               >
                 {loading ? "Analyzing..." : "Generate Quiz"}
               </button>

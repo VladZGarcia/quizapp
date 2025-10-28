@@ -11,7 +11,7 @@ export default function FlashcardInput() {
   }, []);
   return (
     <section className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)] space-y-6">
-      <div className="mt-8 pt-6">
+      <div className="mt-8 pt-2">
         <h1 className="text-3xl font-bold mb-4">QuizMaker</h1>
       </div>
       <p className="p-4">
