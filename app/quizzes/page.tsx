@@ -9,12 +9,31 @@ export default function FlashcardsPage() {
   const [key, setKey] = useState(0);
 
   useEffect(() => {
+    let mounted = true;
+
     // Check if quiz questions are already available in localStorage on mount
     const checkQuestions = () => {
       if (typeof window !== "undefined") {
         const quizResponse = localStorage.getItem("quiz_response");
+        const savedQuestions = localStorage.getItem("quiz_questions");
+        const quizAlreadySaved = localStorage.getItem("quiz_already_saved");
+
         if (quizResponse) {
           setHasQuestions(true);
+        } else if (savedQuestions) {
+          // If we have saved questions but no quiz_response yet,
+          // HandleInput will process these
+          setHasQuestions(false);
+        }
+
+        // Clean up saved questions after checking
+        if (savedQuestions) {
+          localStorage.removeItem("quiz_questions");
+        }
+
+        // If this is a saved quiz being loaded
+        if (quizAlreadySaved === "true") {
+          setIsLoading(false); // Ensure loading is off for saved quizzes
         }
       }
     };
@@ -23,12 +42,18 @@ export default function FlashcardsPage() {
 
     // Listen for quiz generation start
     const handleQuizGenerationStart = () => {
-      setIsLoading(true);
-      setHasQuestions(false);
+      if (!mounted) return;
+      const quizAlreadySaved = localStorage.getItem("quiz_already_saved");
+      // Only show loading state if this isn't a saved quiz
+      if (quizAlreadySaved !== "true") {
+        setIsLoading(true);
+        setHasQuestions(false);
+      }
     };
 
     // Listen for custom event from HandleInput when quiz is generated
     const handleQuizGenerated = () => {
+      if (!mounted) return;
       setIsLoading(false);
       setHasQuestions(true);
       setKey((prev) => prev + 1); // Force Quiz component to remount with new data
@@ -38,6 +63,7 @@ export default function FlashcardsPage() {
     window.addEventListener("quizGenerated", handleQuizGenerated);
 
     return () => {
+      mounted = false;
       window.removeEventListener(
         "quizGenerationStart",
         handleQuizGenerationStart

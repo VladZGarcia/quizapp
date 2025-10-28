@@ -13,29 +13,46 @@ export default function HandleInput() {
   useEffect(() => {
     // Check if there are already saved questions from history
     const savedQuestions = localStorage.getItem("quiz_questions");
+    const quizAlreadySaved = localStorage.getItem("quiz_already_saved");
+    const saved = localStorage.getItem("quiz_input") || "";
+
+    // Always set the input text
+    setInput(saved);
+
     if (savedQuestions) {
-      // Use saved questions instead of generating new ones
+      // We have saved questions (from history), use them directly
       setResponse(savedQuestions);
-      localStorage.removeItem("quiz_questions"); // Clean up after using
+      setShouldGenerate(false);
       setLoading(false);
 
-      // Also load the input text for display
-      const saved = localStorage.getItem("quiz_input") || "";
-      setInput(saved);
-      // Don't generate - we already have the quiz
+      // Store directly in quiz_response and clean up quiz_questions only
+      localStorage.setItem("quiz_response", savedQuestions);
+      localStorage.removeItem("quiz_questions");
+      // Keep quiz_already_saved flag until quiz is completed
+    } else if (!quizAlreadySaved && saved.trim().length > 0) {
+      // Only generate if:
+      // 1. No saved questions
+      // 2. Not a saved quiz
+      // 3. Has input text
+      setShouldGenerate(true);
+    } else {
+      // Either it's a saved quiz without questions (error state)
+      // or there's no input text
       setShouldGenerate(false);
-      return;
+      setLoading(false);
     }
-
-    // Read input from localStorage and prepare to generate
-    const saved = localStorage.getItem("quiz_input") || "";
-    setInput(saved);
-    setShouldGenerate(true);
   }, []);
 
   useEffect(() => {
-    // Only run if we should generate
+    // Return early if generation is not needed
     if (!shouldGenerate) {
+      return;
+    }
+
+    // Always check for saved quiz state even if shouldGenerate is true
+    const quizAlreadySaved = localStorage.getItem("quiz_already_saved");
+    if (quizAlreadySaved === "true") {
+      setShouldGenerate(false);
       return;
     }
 
@@ -47,6 +64,7 @@ export default function HandleInput() {
       setLoading(false);
       return;
     }
+
     setError(null);
     const fetchData = async () => {
       setLoading(true);

@@ -44,12 +44,11 @@ export default function Quiz() {
   useEffect(() => {
     const loadedQuestions = getQuestionsFromLocalStorage();
     setQuestions(loadedQuestions);
-    
+
     // Check if this quiz is already saved
     const alreadySaved = localStorage.getItem("quiz_already_saved");
     if (alreadySaved === "true") {
       setIsAlreadySaved(true);
-      localStorage.removeItem("quiz_already_saved"); // Clean up
     }
   }, []);
 
@@ -93,6 +92,10 @@ export default function Quiz() {
     } else {
       setFinished(true);
     }
+    // Preserve the saved state when transitioning
+    if (isSaved) {
+      setIsAlreadySaved(true);
+    }
   }
 
   function prev() {
@@ -132,9 +135,7 @@ export default function Quiz() {
 
       await saveQuiz(quizTitle, inputText, questions);
       setIsSaved(true);
-
-      // Show success message for 3 seconds
-      setTimeout(() => setIsSaved(false), 3000);
+      setIsAlreadySaved(true); // Set isAlreadySaved when quiz is successfully saved
     } catch (error: any) {
       setSaveError(error.message || "Failed to save quiz");
     }
@@ -145,6 +146,14 @@ export default function Quiz() {
       <div className="p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded shadow">
         <h2 className="text-2xl font-semibold">No quiz questions found</h2>
         <p className="mt-2">Please generate questions first.</p>
+        <div className="mt-4">
+          <button
+            onClick={() => router.push("/quizInput")}
+            className="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded hover:bg-blue-500 dark:hover:bg-blue-600"
+          >
+            Back to Input
+          </button>
+        </div>
       </div>
     );
   }
@@ -184,12 +193,15 @@ export default function Quiz() {
               Restart Quiz
             </button>
             <button
-              onClick={() => router.push("/quizInput")}
+              onClick={() => {
+                localStorage.removeItem("quiz_already_saved"); // Clean up when leaving
+                router.push("/quizInput");
+              }}
               className="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded hover:bg-blue-500 dark:hover:bg-blue-600"
             >
               Back to Input
             </button>
-            {user && !isAlreadySaved && (
+            {!isAlreadySaved && user && (
               <button
                 onClick={handleSaveQuiz}
                 disabled={isSaved}
@@ -217,23 +229,24 @@ export default function Quiz() {
     <div className="p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded shadow">
       <div className="flex justify-between items-center mb-4">
         <p className="text-xl font-bold">Quiz</p>
-        {user && !isAlreadySaved ? (
-          <button
-            onClick={handleSaveQuiz}
-            disabled={isSaved}
-            className={`px-4 py-2 rounded text-white transition-colors ${
-              isSaved
-                ? "bg-green-500 cursor-not-allowed"
-                : "bg-purple-600 hover:bg-purple-700"
-            }`}
-          >
-            {isSaved ? "✓ Saved!" : "Save Quiz"}
-          </button>
-        ) : !isAlreadySaved ? (
-          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 italic">
-            Sign in to save quizzes
-          </p>
-        ) : null}
+        {!isAlreadySaved &&
+          (user ? (
+            <button
+              onClick={handleSaveQuiz}
+              disabled={isSaved}
+              className={`px-4 py-2 rounded text-white transition-colors ${
+                isSaved
+                  ? "bg-green-500 cursor-not-allowed"
+                  : "bg-purple-600 hover:bg-purple-700"
+              }`}
+            >
+              {isSaved ? "✓ Saved!" : "Save Quiz"}
+            </button>
+          ) : (
+            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 italic">
+              Sign in to save quizzes
+            </p>
+          ))}
       </div>
 
       {saveError && (
@@ -288,24 +301,38 @@ export default function Quiz() {
       )}
       <div className="mt-6 flex justify-between items-center">
         <button
-          onClick={prev}
-          disabled={index === 0}
-          className="px-3 py-1 rounded bg-yellow-300 hover:bg-yellow-200 dark:bg-yellow-500 dark:hover:bg-yellow-400 text-gray-900 dark:text-gray-100 disabled:opacity-50"
+          onClick={() => {
+            localStorage.removeItem("quiz_already_saved"); // Clean up when leaving
+            router.push("/quizInput");
+          }}
+          className="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded hover:bg-blue-500 dark:hover:bg-blue-600"
         >
-          Back
+          Back to Input
         </button>
-        {showFeedback ? (
-          <button
-            onClick={next}
-            className="px-4 py-2 bg-yellow-500 dark:bg-yellow-600 hover:bg-yellow-400 dark:hover:bg-yellow-500 text-white rounded"
-          >
-            {index + 1 === questions.length ? "Finish" : "Next"}
-          </button>
-        ) : (
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            Select an answer
-          </span>
-        )}
+
+        <div className="flex items-center gap-6">
+          {showFeedback ? (
+            <>
+              <button
+                onClick={prev}
+                disabled={index === 0}
+                className="px-3 py-2 rounded bg-yellow-300 hover:bg-yellow-200 dark:bg-yellow-500 dark:hover:bg-yellow-400 text-gray-900 dark:text-gray-100 disabled:opacity-50"
+              >
+                Back
+              </button>
+              <button
+                onClick={next}
+                className="px-4 py-2 bg-yellow-500 dark:bg-yellow-600 hover:bg-yellow-400 dark:hover:bg-yellow-500 text-white rounded"
+              >
+                {index + 1 === questions.length ? "Finish" : "Next"}
+              </button>
+            </>
+          ) : (
+            <span className="text-sm text-gray-500 dark:text-gray-400">
+              Select an answer
+            </span>
+          )}
+        </div>
       </div>
       <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
         Question {index + 1} / {questions.length}

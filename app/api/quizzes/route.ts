@@ -50,6 +50,74 @@ export async function POST(req: NextRequest) {
   }
 }
 
+export async function DELETE(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const quizId = searchParams.get("quizId");
+    const body = await req.json();
+    const clerkUserId = body.clerkUserId;
+
+    if (!quizId || !clerkUserId) {
+      return NextResponse.json(
+        { error: "Missing quizId or clerkUserId" },
+        { status: 400 }
+      );
+    }
+
+    // Get the user from Supabase
+    const { data: user } = await supabase
+      .from("users")
+      .select("id")
+      .eq("clerk_user_id", clerkUserId)
+      .single();
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "User not found. Please sign in again." },
+        { status: 404 }
+      );
+    }
+
+    // Verify that the quiz belongs to the user before deleting
+    const { data: quiz } = await supabase
+      .from("quizzes")
+      .select("user_id")
+      .eq("id", quizId)
+      .single();
+
+    if (!quiz) {
+      return NextResponse.json(
+        { error: "Quiz not found" },
+        { status: 404 }
+      );
+    }
+
+    if (quiz.user_id !== user.id) {
+      return NextResponse.json(
+        { error: "Unauthorized to delete this quiz" },
+        { status: 403 }
+      );
+    }
+
+    // Delete the quiz
+    const { error } = await supabase
+      .from("quizzes")
+      .delete()
+      .eq("id", quizId)
+      .eq("user_id", user.id);
+
+    if (error) throw error;
+
+    return NextResponse.json({ success: true });
+  } catch (error: any) {
+    console.error("Error deleting quiz:", error);
+    return NextResponse.json(
+      { error: error.message || "Failed to delete quiz" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);

@@ -7,7 +7,7 @@ export function useSaveQuiz() {
   const { user } = useUser();
 
   const saveQuiz = useCallback(async (title: string, inputText: string, questions: any[]) => {
-    if (!user) {
+    if (!user?.id) {
       throw new Error("You must be signed in to save quizzes");
     }
 
@@ -34,10 +34,10 @@ export function useSaveQuiz() {
       console.error("Error saving quiz:", error);
       throw error;
     }
-  }, [user]);
+  }, [user?.id]); // Only depend on user.id
 
   const getQuizzes = useCallback(async () => {
-    if (!user) return [];
+    if (!user?.id) return [];
 
     try {
       const response = await fetch(`/api/quizzes?clerkUserId=${user.id}`);
@@ -52,7 +52,33 @@ export function useSaveQuiz() {
       console.error("Error fetching quizzes:", error);
       return [];
     }
-  }, [user]);
+  }, [user?.id]); // Only depend on user.id
 
-  return { saveQuiz, getQuizzes };
+  const deleteQuiz = useCallback(async (quizId: string) => {
+    if (!user?.id) {
+      throw new Error("You must be signed in to delete quizzes");
+    }
+
+    try {
+      const response = await fetch(`/api/quizzes?quizId=${quizId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clerkUserId: user.id,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to delete quiz");
+      }
+
+      return true;
+    } catch (error) {
+      console.error("Error deleting quiz:", error);
+      throw error;
+    }
+  }, [user?.id]); // Only depend on user.id
+
+  return { saveQuiz, getQuizzes, deleteQuiz };
 }
