@@ -1,452 +1,188 @@
-# 🧠 EZ Quiz Maker AI[🇬🇧 English README](./README.en.md)
+# 🧠 EZ Quiz Maker AI
 
-En AI-driven quizapplikation byggd med **Next.js 15 App Router**, **TypeScript** och **Cohere AI**.# 🛍️ E-handelsplattform i Next.js
-
-Projektet använder artificiell intelligens för att automatiskt generera quizfrågor från godtycklig text.
-
-Användare kan spara sina quiz, granska historik och testa sina kunskaper med en interaktiv timer.
-
----Syftet med projektet är att lära oss omvandla en ide med hjälp av olika tekniker inom Next.js/React.
-
-## 📑 Innehåll---
-
-- [Om projektet](#-om-projektet)## 📑 Innehåll
-
-- [Funktioner](#-funktioner)
-
-- [Teknologier](#-teknologier)- [Om projektet](#-om-projektet)
-
-- [Installation](#-installation)- [Funktioner](#-funktioner)
-
-- [Användning](#-användning)- [Teknologier](#-teknologier)
-
-- [Projektstruktur](#-projektstruktur)- [Installation](#-installation)
-
-- [Lärdomar](#-lärdomar)- [Användning](#-användning)
-
-- [Framtida förbättringar](#-framtida-förbättringar)- [Projektstruktur](#-projektstruktur)
-
-- [Kontakt](#-kontakt)- [Arbetsflöde](#-arbetsflöde)
-
-- [Sprintplan](#-sprintplan)
-
----- [Bidra](#-bidra)
-
-- [Lärdomar](#-lärdomar)
-
-## 📖 Om projektet- [Licens](#-licens)
-
-- [Kontakt](#-kontakt)
-
-Detta är ett individuellt projekt där jag har byggt en **AI-driven quizapplikation**.- [Individuell Reflektion](#individuell-reflektion)
-
-Syftet har varit att träna på:
+En AI-driven quizapplikation där du kan generera quizfrågor från valfri text, spara quiz, och testa dina kunskaper. Byggd med **Next.js 15 TypeScript Supabase** och **Cohere AI**.
 
 ---
 
-- Next.js 15 App Router och Server Components
+## � Innehåll
 
-- Integration med AI-tjänster (Cohere AI)## 📖 Om projektet
+- [🚀 Om projektet](#-om-projektet)
+- [✨ Funktioner](#-funktioner)
+- [🛠 Teknologier](#-teknologier)
+- [⚙️ Installation](#️-installation)
+- [📖 Användning](#-användning)
+- [📂 Projektstruktur](#-projektstruktur)
+- [📈 Arbetsflöde](#-arbetsflöde)
+- [🤝 Bidra](#-bidra)
+- [💡 Lärdomar](#-lärdomar)
+- [🔮 Framtida förbättringar](#-framtida-förbättringar)
+- [✍️ Kontakt](#-kontakt)
+- [Licens](#-licens)
 
-- Autentisering med Clerk
+---
 
-- Databashantering med SupabaseDetta är en gruppövning där målet var att bygga en **minimalistisk e-handelsplattform**.
+## �🚀 Om projektet
 
-- TypeScript och React hooksSyftet är att träna på:
+Detta är ett individuellt projekt där jag har byggt en fullstack-applikation för att skapa, spara och spela **AI-genererade quiz**. Syftet har varit att lära mig modern webbutveckling med Next.js App Router, AI-integration, autentisering och databas.
 
-- Responsiv design och dark mode
-
-- Arbete i grupp (Agilt)
-
----- Arbete i projekt (GitHub)
-
-- Next.js/React kod
+---
 
 ## ✨ Funktioner
 
+- 🤖 AI-genererade quizfrågor från valfri text (Cohere AI)
+- 👤 Inloggning och autentisering (Clerk)
+- 💾 Spara quiz och visa quizhistorik (Supabase)
+- ⏱️ Timer: 15 sekunder per fråga
+- 🎯 Poängräkning och resultatsida
+- 🌓 Dark/light mode med systemdetektion
+- 📱 Mobilanpassad och responsiv design
+- 🍔 Hamburger-meny för små skärmar
+
 ---
 
-- ✅ AI-genererade quizfrågor från valfri text (Cohere AI)
+## 🛠 Teknologier
 
-- ✅ Användarkonton med Clerk-autentisering## ✨ Funktioner
+- [**Next.js 15** (App Router, Server Components)](https://nextjs.org/)
+- [**TypeScript**](https://www.typescriptlang.org/)
+- [**Tailwind CSS**](https://tailwindcss.com/)
+- [**Clerk** (autentisering)](https://clerk.com/)
+- [**Supabase** (databas)](https://supabase.com/)
+- [**Cohere AI** (quizgenerering)](https://cohere.com/)
+- [**next-themes** (dark mode)](https://github.com/pacocoursey/next-themes)
 
-- ✅ Spara quiz till databas (Supabase)
+---
 
-- ✅ Quizhistorik med sparade quiz- ✅ Startsida med Hero-sektion och CTA, utvalda produkter
+## ⚙️ Installation
 
-- ✅ Interaktiv quiz med timer (15 sekunder per fråga)- ✅ Produktsida med sökfunktion och kategori filtrering
-
-- ✅ Poängsystem och resultatsammanfattning- ✅ Sökfält och navigeringsfält
-
-- ✅ Dark/light mode med systemdetektion- ✅ Adminsida med formulär för uppdatering, radering och skapande av produkt
-
-- ✅ Responsiv design för mobil och desktop
-
-- ✅ Hamburgernavigering för små skärmar---
-
----## 🛠 Teknologier
-
-## 🛠 Teknologier- [Next.js 15 (App Router)](https://nextjs.org/)
-
-- [TypeScript](https://www.typescriptlang.org/)
-
-- [Next.js 15 (App Router)](https://nextjs.org/)- [Tailwind CSS](https://tailwindcss.com/)
-
-- [TypeScript](https://www.typescriptlang.org/)- [DummyJSON - API](https://dummyjson.com/)
-
-- [Tailwind CSS](https://tailwindcss.com/)- [Sonner - Toast](https://github.com/emilkowalski/sonner)
-
-- [Clerk](https://clerk.com/) - Autentisering- [ZOD](https://zod.dev/)
-
-- [Supabase](https://supabase.com/) - Databas- [WAVE](https://wave.webaim.org/)
-
-- [Cohere AI](https://cohere.com/) - AI-generering
-
-- [next-themes](https://github.com/pacocoursey/next-themes) - Theme management---
-
----## ⚙️ Installation
-
-## ⚙️ Installation```bash
-
-# Klona repo
-
-````bashgit clone https://github.com/VladZGarcia/ecommersepage.git
-
-# Klona repo
-
-git clone https://github.com/VladZGarcia/quizapp.git# Gå in i projektmappen
-
-cd ecommersepage
-
-# Gå in i projektmappen
-
-cd quizapp# Installera beroenden
-
+```bash
+git clone https://github.com/VladZGarcia/quizapp.git
+cd quizapp
 npm install
+```
 
-# Installera beroenden
+Skapa en `.env.local`-fil med:
 
-npm install# Starta utvecklingsserver
+```
+COHERE_API_KEY=din_cohere_nyckel
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=din_clerk_publishable_key
+CLERK_SECRET_KEY=din_clerk_secret_key
+NEXT_PUBLIC_SUPABASE_URL=din_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=din_supabase_anon_key
+```
 
+Starta utvecklingsservern:
+
+```bash
 npm run dev
+```
 
-# Konfigurera miljövariabler```
+---
 
-# Skapa en .env.local fil och lägg till:
+## 📖 Användning
 
-# NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=---
+1. Gå till startsidan och klicka på "Skapa Quiz"
+2. Skriv eller klistra in valfri text
+3. Låt AI:n generera quizfrågor
+4. Svara på frågorna (15 sekunder per fråga)
+5. Se ditt resultat och spara quizet (kräver inloggning)
+6. Gå till historik för att se och återuppta sparade quiz
 
-# CLERK_SECRET_KEY=
+---
 
-# NEXT_PUBLIC_SUPABASE_URL=## 🚀 Användning
+## 📂 Projektstruktur
 
-# NEXT_PUBLIC_SUPABASE_ANON_KEY=
-
-# COHERE_API_KEY=- Navigering -> navigeringsfält med sökfunktion
-
-- Startsida -> hero med CTA som går till alla produkter + utvalda produkter + om oss + kontakt
-
-# Starta utvecklingsserver- Produkt -> alla produkter + sökfält + kategorifiltrering
-
-npm run dev- Produktdetalj -> produktbeskrivning + omdömen + recension + lagerstatus + fraktinformation + val av antal + liknande produkter
-
-```- Om oss -> statisk sida med text
-
-- Kontakt -> sida med kontaktformulär
-
----- Footer -> footer med länkar och nyhetsbrev
-
-- Admin -> lista med alla produkter + radering
-
-## 🚀 Användning- Admin/skapa -> formulär för att skapa upp produkt
-
-- Admin/uppdatera -> formulär för att uppdatera befintlig produkt
-
-- **Startsida** → Hero-sektion med CTA-knapp till quiz-skaparen
-
-- **Quiz Input** → Skriv in eller välj exempeltext, AI genererar quizfrågor---
-
-- **Quiz** → Svara på frågor med 15 sekunders timer per fråga
-
-- **Resultat** → Se ditt resultat, spara quiz (kräver inloggning)## 📂 Projektstruktur
-
-- **Historik** → Granska och återuppta sparade quiz
-
-- **Dark Mode** → Automatisk systemdetektion eller manuell växling```
-
+```
 |-- app/
-
----|   |-- page.tsx                 # Startsida
-
-|   |-- about/page.tsx           # Om oss
-
-## 📂 Projektstruktur|   |-- admin/
-
-|   |   |-- page.tsx             # Adminsida
-
-```|   |   |-- create/page.tsx      # Produktskapande
-
-|-- app/|   |   |-- update/[id]/page.tsx # Produktuppdatering
-
-|   |-- page.tsx                 # Startsida|   |-- api/action.ts            # Server actions för formulärvalidering
-
-|   |-- layout.tsx               # Root layout med providers|   |-- contact/page.tsx         # Kontaktsida
-
-|   |-- quizInput/page.tsx       # Quiz input-sida|   |-- pages/products/
-
-|   |-- quizzes/page.tsx         # Quiz-sida|   |   |--page.tsx              # Produktsida
-
-|   |-- api/|   |   |--[id]/page.tsx         # Produktdetaljsida
-
-|   |   |-- cohere/route.ts      # Cohere AI endpoint|-- components/                  # Återanvändbara komponenter
-
-|   |   |-- quizzes/route.ts     # Quiz CRUD endpoint|-- components/breadcrumb/       # Breadcrumbkomponenter
-
-|   |   |-- users/route.ts       # User sync endpoint|-- components/categories/       # Kategorikomponenter
-
-|-- components/|-- components/Nav/              # Navigationskomponenter
-
-|   |-- auth/                    # Autentiseringskomponenter|-- components/product-card/     # Produktkortkomponenter
-
-|   |-- form/                    # Formulärkomponenter|-- components/product-details/  # Produktdetaljkomponenter
-
-|   |   |-- formcard.tsx         # Quiz input-kort|-- lib/data/
-
-|   |   |-- quiz_history.tsx     # Quiz-historik|   |   |-- pages.json           # Navigationsfältslänkar
-
-|   |   |-- quiz_text_input.tsx  # Textinmatning|   |   |-- product-data.tsx     # API fetch funktioner
-
-|   |-- layout/                  # Layout-komponenter|   |   |-- utils.ts             # Återanvändbara hjälpfunktioner
-
-|   |   |-- navbar.tsx           # Navigation med hamburger|-- lib/interfaces/products.ts   # Återanvändbara interfaces
-
-|   |   |-- footer.tsx           # Footer|-- public/                      # Bilder
-
-|   |-- quiz/                    # Quiz-komponenter```
-
-|   |   |-- Quiz.tsx             # Huvudquiz-komponent
-
-|   |   |-- handle_input.tsx     # Input-hantering---
-
-|   |-- theme/                   # Theme-komponenter
-
-|   |   |-- ThemeProvider.tsx    # Theme context## 📈 Arbetsflöde
-
-|   |   |-- ThemeToggle.tsx      # Theme-switch
-
-|-- hooks/- Grupparbete i agila sprintar (SCRUM)
-
-|   |-- useSaveQuiz.ts           # Quiz-sparande hook- Delade upp issues i feature branches
-
-|   |-- useSyncUser.ts           # User-synk hook- PR + kodgranskning
-
+|   |-- globals.css                # Globala stilar
+|   |-- layout.tsx                 # Root layout och providers
+|   |-- not-found.tsx              # 404-sida
+|   |-- page.tsx                   # Startsida
+|   |-- about/page.tsx             # Om oss
+|   |-- contact/page.tsx           # Kontaktsida
+|   |-- privacy/page.tsx           # Integritetspolicy
+|   |-- terms/page.tsx             # Användarvillkor
+|   |-- quizInput/page.tsx         # Quiz input (textinmatning)
+|   |-- quizzes/page.tsx           # Quiz och resultat
+|   |-- api/
+|   |   |-- cohere/route.ts        # AI-generering (Cohere endpoint)
+|   |   |-- quizzes/route.ts       # Quiz-API (CRUD)
+|   |   |-- users/route.ts         # User sync endpoint
+|-- components/
+|   |-- auth/                      # Autentisering (Clerk)
+|   |-- form/                      # Formulär, quizhistorik, input
+|   |-- layout/                    # Navbar, footer
+|   |-- quiz/                      # Quizkomponenter (logik, UI)
+|   |-- shared/                    # Återanvändbara knappar m.m.
+|   |-- theme/                     # ThemeProvider, ThemeToggle
+|-- example_text/                  # Exempeltexter för quiz
+|-- hooks/
+|   |-- useSaveQuiz.ts             # Hook för att spara quiz
+|   |-- useSyncUser.ts             # Hook för att synka användare
 |-- lib/
+|   |-- supabase.ts                # Supabase-klient
+|-- public/
+|   |-- example.json               # Exempeldata
+|-- middleware.ts                  # Clerk middleware
+|-- next.config.js                 # Next.js-konfiguration
+|-- tailwind.config.js             # Tailwind-konfiguration
+|-- tsconfig.json                  # TypeScript-konfiguration
+|-- package.json                   # Projektmetadata och beroenden
+```
 
-|   |-- supabase.ts              # Supabase-klient---
+---
 
-|-- middleware.ts                # Clerk middleware
+## 📈 Arbetsflöde
 
-```## 🗓 Sprintplan
+Eftersom jag arbetade ensam med projektet använde jag **GitHub Projects** för att strukturera och planera mitt arbete. Jag skapade issues för att dela upp projektet i mindre delmål och funktioner. Varje större funktion eller bugg fick en egen issue, vilket gjorde det lättare att prioritera och följa min egen utvecklingsprocess.
 
+Jag arbetade i en utvecklingsbranch (t.ex. dev) och gjorde regelbundna commits för varje avklarad uppgift. När en issue var löst stängde jag den på GitHub. På så sätt fick jag en tydlig överblick över vad som var gjort och vad som återstod.
 
+Detta arbetsflöde hjälpte mig att hålla projektet organiserat, även som ensam utvecklare, och gav en bra historik över projektets utveckling.
 
----### Sprint 1 - Grundläggande struktur
+---
 
+## 🤝 Bidra
 
+Vill du bidra?
 
-## 📚 Lärdomar- Bestämde vilket API vi skulle använda
-
-- Tog fram design med hjälp av Figma
-
-Genom detta projekt har jag lärt mig:- Satte upp Next.js-projektet
-
-- Skapade menyer & statiska sidor
-
-- **Next.js 15 App Router** – Server Components vs Client Components, Server Actions
-
-- **AI-integration** – Att arbeta med Cohere AI API för textgenerering### Sprint 2 - Produktsidan
-
-- **Autentisering** – Implementera Clerk med modal mode och redirect-hantering
-
-- **Databas** – Supabase-integration med Row Level Security (RLS)- Satte upp produktsidan och ingående komponenter
-
-- **State Management** – Custom hooks (useCallback, useEffect) för optimerad rendering- Satte upp produktdetaljsidan och ingående komponenter
-
-- **Dark Mode** – next-themes med systemdetektion och manuell toggle- Jobbade med nya ideér/tillägg på tidigare komponenter
-
-- **Responsiv Design** – Mobile-first approach med Tailwind breakpoints
-
-- **TypeScript** – Strikt typning för säkrare kod### Sprint 3 - Adminsidan
-
-- **localStorage** – Dataöverföring mellan komponenter
-
-- **Performance** – Förhindra onödiga re-renders och API-anrop- Satte upp Adminsidan och tillhörande komponenter
-
-
-
-### Specifika utmaningar jag löste:### Sprint 4 - Finputs
-
-
-
-1. **Infinite loop-problem** – Quiz history-komponenten gjorde oändliga API-anrop. Löste genom att wrappa funktioner i `useCallback` med korrekta dependencies.- Förbättrade befintliga komponenter och finputsade på detaljer
-
-
-
-2. **Quiz-laddning från historik** – När användare klickade på sparad quiz genererades ny quiz istället. Löste med flagga (`shouldGenerate`) för att skilja på ny generering och laddning.---
-
-
-
-3. **Theme-integration** – Next.js 15 kräver att ThemeProvider placeras i `<body>` istället för `<html>` för korrekt script-injektion.## 🤝 Bidra
-
-
-
-4. **Sign-in redirect** – Implementerade `forceRedirectUrl` med `usePathname` för att behålla användaren på samma sida efter inloggning.Vill du bidra?
-
-
-
-5. **Layout-konsistens** – Använde `flex-1` och flexbox-kedjor för att göra textarea adaptiv till tillgängligt utrymme.1. Forka projektet
-
+1. Forka projektet
 2. Skapa en feature-branch (`git checkout ......`)
-
----3. Commit & push
-
+3. Commit & push
 4. Skicka en Pull Request
+
+---
+## 💡 Lärdomar
+
+- Skillnaden mellan Server och Client Components i Next.js 15
+- AI-integration med Cohere API
+- Autentisering och redirect-hantering med Clerk
+- Supabase och Row Level Security
+- State management med custom hooks och useCallback
+- Mobile-first och responsiv design med Tailwind
+- Optimering av rendering och API-anrop
+
+---
 
 ## 🔮 Framtida förbättringar
 
+- Fler quiztyper (t.ex. sant/falskt, flervalsfrågor)
+- Svårighetsgrader
+- Dela quiz via länk
+- Statistik och användarprogress
+- Multiplayer-läge
+
 ---
 
-Jag planerar att vidareutveckla:
-
-## 📚 Lärdomar
-
-- **Fler quiztyper** – Sant/falskt, flervalsalternativ, fritext
-
-- **Svårighetsgrader** – AI genererar frågor baserat på vald svårighetsgrad- Skillnaden mellan Server & Client Components i Next.js
-
-- **Delning av quiz** – Dela quiz med andra via länk- Agila metoder
-
-- **Statistik** – Detaljerad statistik över resultat över tid- API
-
-- **Kategorier** – Organisera quiz i kategorier- Responsivitet
-
-- **Multiplayer** – Tävla mot andra i realtid- Github feature branches
-
-- **Anpassad timer** – Låt användaren välja tid per fråga
-
-- **Export** – Exportera quiz som PDF eller JSON---
-
-
-
----## Licens
-
-
-
-## ✍️ KontaktDetta projekt är utvecklat i utbildningssyfte och är inte avsett för produktion.
-
-
-
-- GitHub: [VladZGarcia](https://github.com/VladZGarcia/)---
-
-- Projekt: [quizapp](https://github.com/VladZGarcia/quizapp)
 
 ## ✍️ Kontakt
 
----
-
-- https://github.com/VladZGarcia/
-
-## 📸 Teknisk Översikt- https://github.com/MissKowalik/
-
-- https://github.com/ebobic/
-
-### Dataflöde- https://github.com/Consolider/
-
-
-
-1. Användare skriver in text i quiz input---
-
-2. Text skickas till Cohere AI API
-
-3. AI genererar quizfrågor i JSON-format## Bilder
-
-4. Quiz visas med interaktiv timer
-
-5. Resultat sparas till Supabase (om inloggad)![alt text](https://github.com/VladZGarcia/ecommersepage/blob/dev/public/images/1.jpg "Startsida")
-
-6. Quiz kan återupptas från historik![alt text](https://github.com/VladZGarcia/ecommersepage/blob/dev/public/images/2.jpg "Featured Products")
-
-![alt text](https://github.com/VladZGarcia/ecommersepage/blob/dev/public/images/3.jpg "Contact + Footer")
-
-### Arkitektur![alt text](https://github.com/VladZGarcia/ecommersepage/blob/dev/public/images/4.jpg "Product Detail")
-
-
-
-- **Frontend**: Next.js 15 App Router med React Server Components---
-
-- **Backend**: Next.js API Routes för Cohere AI och Supabase
-
-- **Databas**: PostgreSQL (via Supabase) med RLS## Individuell Reflektion
-
-- **Autentisering**: Clerk med middleware-skydd
-
-- **Styling**: Tailwind CSS med custom dark modeMin största insats i e-handelsprojektet har varit att designa och implementera kärnkomponenter för produktdatahantering och produktpresentation. Jag har skapat både logik och UI-komponenter som utgör grunden för hur produkter hanteras och visas i applikationen.
-
-
-
-### Säkerhet### Filer och mappar jag har skapat
-
-
-
-- Clerk middleware för route-protection- **product-data.tsx**
-
-- Supabase RLS policies för dataåtkomst  Jag har byggt hela datalagret för produkter, inklusive funktioner för att hämta, söka, filtrera, lägga till, uppdatera och ta bort produkter via API. Denna fil är navet för all produktdata och gör det enkelt att återanvända logik i hela projektet.
-
-- API-nycklar i environment variables
-
-- User ID-validering på server-side- **products.ts**
-
-  Jag har definierat alla TypeScript interfaces för produkter, kategorier, recensioner och metadata. Detta har gett projektet en robust typstruktur och säkerställt att all produktdata är konsekvent och typad, vilket minskar buggar och gör utvecklingen snabbare.
+- GitHub: [VladZGarcia](https://github.com/VladZGarcia)
+- Projekt: [quizapp](https://github.com/VladZGarcia/quizapp)
 
 ---
 
-- **product-card mappen**
+## Licens
 
-Detta projekt är utvecklat i utbildningssyfte och visar mina färdigheter inom modern webbutveckling med Next.js, AI-integration och fullstack-utveckling.  Jag har skapat och strukturerat alla komponenter för att visa enskilda produkter i UI:t, inklusive bild, detaljer, header och knappar. Dessa komponenter är återanvändbara och används i produktlistor, sökresultat och på produktsidor. Jag har lagt stor vikt vid att designa dem responsivt och tillgängligt.
+Detta projekt är utvecklat i utbildningssyfte och visar mina kunskaper inom modern webbutveckling, AI och fullstack.
 
-
-- **product-details mappen**
-  Jag har byggt komponenter för att visa detaljerad information om en produkt, såsom beskrivning, pris, bilder, recensioner och fraktinformation. Dessa komponenter gör det möjligt för användaren att få en komplett bild av produkten och fatta köpbeslut.
-
-### Funktionalitet och integrationer jag har bidragit med
-
-- Jag har bidragit med att få **SearchBar**, **CategoryList** och **Pagination** att samverka.
-  Genom att vidareutveckla logiken i projektet har jag gjort det möjligt för användaren att söka, filtrera på kategori och samtidigt bläddra mellan sidor – med bevarade filter och söktermer i URL:en.
-  Detta har krävt att jag integrerat och synkroniserat dessa komponenter så att de fungerar sömlöst tillsammans, även om jag inte skapade dem från grunden.
-
-- Jag har implementerat att **search-bar** stängs automatiskt när man klickar utanför sökfältet, vilket förbättrar användarupplevelsen och minskar risken för att sökfältet ligger kvar öppet i onödan.
-
-- Jag har även lagt till funktionalitet så att **search-bar** stängs direkt när man klickar på ett produktkort i searchbar-dropdown, vilket ger ett smidigt och intuitivt flöde för användaren.
-
-## Tekniker och lösningar
-
-- **TypeScript interfaces** för säker och skalbar datahantering
-- **Asynkrona API-anrop** med error handling för robust dataloggik
-- **Modulär komponentstruktur** i React/Next.js för återanvändbarhet och enkel vidareutveckling
-- **Responsiv design** med Tailwind CSS för att optimera användarupplevelsen på alla enheter
-- **Integration av filter, sökning och paginering** för en sammanhängande och användarvänlig produktupplevelse
-- **Event-hantering och DOM-interaktion** för att hantera klick utanför och stänga komponenter automatiskt
-
-## Resultat och värde
-
-Genom att skapa dessa filer och mappar samt integrera filter, sökning och paginering har jag lagt grunden för en skalbar och underhållbar e-handelsplattform. Min kod har gjort det enkelt att hantera produktdata, visa produkter på ett attraktivt sätt och bygga vidare på funktionaliteten i projektet. Jag har bidragit med både teknisk struktur och användarvänliga gränssnitt som är centrala för projektets framgång.
-
-## Framtida förbättringar
-
-Jag ser potential att vidareutveckla:
-
-- Mer avancerad filtrering och sortering av produkter
-- Caching och optimering av API-anrop
-- Fler UI-förbättringar för produktpresentation och interaktion
-- Förbättrad felhantering och användarfeedback
-````
+---
