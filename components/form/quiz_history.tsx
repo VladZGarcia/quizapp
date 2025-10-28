@@ -92,7 +92,7 @@ export default function QuizHistory() {
           <button
             key={quiz.id}
             onClick={() => handleQuizClick(quiz)}
-            className="w-full text-left p-3 sm:p-4 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-md transition-all group"
+            className="w-full text-left p-3 sm:p-4 bg-gray-300 border-yellow-500 dark:bg-gray-700 rounded-lg border dark:border-gray-600 hover:border-yellow-400 dark:hover:border-blue-400 hover:shadow-md transition-all group"
           >
             <div className="flex justify-between items-start gap-2">
               <div className="flex-1 min-w-0">

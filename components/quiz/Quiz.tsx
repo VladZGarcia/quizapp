@@ -168,9 +168,9 @@ export default function Quiz() {
         )}
 
         <div className="mt-4 space-y-3">
-          <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
+          <div className="flex flex-wrap gap-10  justify-center">
             <button
-              className="px-4 py-2 bg-gray-500 dark:bg-yellow-600 text-white rounded hover:bg-gray-400 dark:hover:bg-yellow-500"
+              className="px-4 py-2 bg-yellow-500 dark:bg-yellow-600 text-white rounded hover:bg-yellow-400 dark:hover:bg-yellow-500"
               onClick={() => {
                 setIndex(0);
                 setScore(0);
@@ -290,14 +290,14 @@ export default function Quiz() {
         <button
           onClick={prev}
           disabled={index === 0}
-          className="px-3 py-1 rounded bg-gray-300 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 disabled:opacity-50"
+          className="px-3 py-1 rounded bg-yellow-300 hover:bg-yellow-200 dark:bg-yellow-500 dark:hover:bg-yellow-400 text-gray-900 dark:text-gray-100 disabled:opacity-50"
         >
           Back
         </button>
         {showFeedback ? (
           <button
             onClick={next}
-            className="px-4 py-2 bg-gray-500 dark:bg-yellow-600 hover:bg-gray-400 dark:hover:bg-yellow-500 text-white rounded"
+            className="px-4 py-2 bg-yellow-500 dark:bg-yellow-600 hover:bg-yellow-400 dark:hover:bg-yellow-500 text-white rounded"
           >
             {index + 1 === questions.length ? "Finish" : "Next"}
           </button>
