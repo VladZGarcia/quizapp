@@ -1,3 +1,5 @@
+# [🇬🇧 English README](./README.en.md)
+
 # 🧠 EZ Quiz Maker AI
 
 En AI-driven quizapplikation där du kan generera quizfrågor från valfri text, spara quiz, och testa dina kunskaper. Byggd med **Next.js 15 TypeScript Supabase** och **Cohere AI**.
@@ -151,6 +153,7 @@ Vill du bidra?
 4. Skicka en Pull Request
 
 ---
+
 ## 💡 Lärdomar
 
 - Skillnaden mellan Server och Client Components i Next.js 15
@@ -172,7 +175,6 @@ Vill du bidra?
 - Multiplayer-läge
 
 ---
-
 
 ## ✍️ Kontakt
 
