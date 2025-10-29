@@ -10,10 +10,19 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Close menu when clicking outside
+  // Close menu when clicking outside, but ignore Clerk-related elements
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      const target = event.target as HTMLElement;
+
+      // Check if the click is on any Clerk-related element
+      const isClerkElement = target.closest('[class*="cl-"]');
+      if (isClerkElement) {
+        return;
+      }
+
+      // Only close if clicking outside both the menu and Clerk elements
+      if (menuRef.current && !menuRef.current.contains(target)) {
         setIsMenuOpen(false);
       }
     };
@@ -29,7 +38,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm transition-colors">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" ref={menuRef}>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-4 h-16">
           {/* Logo */}
           <div className="flex items-center">
@@ -91,7 +100,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="sm:hidden pb-4 pt-2 space-y-4">
+          <div ref={menuRef} className="sm:hidden pb-4 pt-2 space-y-4">
             {/* Theme Toggle */}
             <div className="flex items-center justify-between px-2">
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
