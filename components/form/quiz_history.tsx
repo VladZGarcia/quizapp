@@ -59,7 +59,7 @@ export default function QuizHistory() {
       mounted = false;
       clearTimeout(fetchTimeout);
     };
-  }, [user?.id]); // Only depend on user.id instead of the whole user object and getQuizzes function
+  }, [user?.id, getQuizzes]);
 
   const handleQuizClick = (quiz: Quiz) => {
     // Store quiz data in localStorage
