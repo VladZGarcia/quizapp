@@ -15,8 +15,9 @@ export default function FormCard() {
   });
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("new");
+  const [rejectedLength, setRejectedLength] = useState<number | null>(null);
   const router = useRouter();
-  const maxChars = 15000;
+  const maxChars = 50000;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -32,6 +33,9 @@ export default function FormCard() {
     const value = e.target.value;
     if (value.length <= maxChars) {
       setInput(value);
+      setRejectedLength(null);
+    } else {
+      setRejectedLength(value.length);
     }
   }
 
@@ -75,6 +79,13 @@ export default function FormCard() {
                 maxChars={maxChars}
                 onSampleClick={loadSampleText}
               />
+              <p
+                className={`text-sm mt-2 ${rejectedLength ? "text-red-500" : "text-gray-500 dark:text-gray-400"}`}
+              >
+                {rejectedLength
+                  ? `Text exceeds the limit! Your text has ${rejectedLength.toLocaleString("en-US")} characters (max ${maxChars.toLocaleString("en-US")}).`
+                  : `${input.length.toLocaleString("en-US")} / ${maxChars.toLocaleString("en-US")} characters`}
+              </p>
             </div>
 
             <div className="flex justify-center gap-4 p-4 mt-4">
